@@ -87,7 +87,7 @@
   <section id="register" class="py-16">
     <div class="container mx-auto px-4 max-w-3xl">
       <h2 class="text-2xl font-bold text-center mb-8">立即報名</h2>
-		<form action="https://docs.google.com/forms/d/e/1FAIpQLSeyKMLuqnn_5nwLC-o7sdwOSdo2oTYHCVX7OF_DHtTJJYZOkA/formResponse" method="POST" target="_blank" class="space-y-4">
+		<form id="gform" action="https://docs.google.com/forms/d/e/1FAIpQLSeyKMLuqnn_5nwLC-o7sdwOSdo2oTYHCVX7OF_DHtTJJYZOkA/formResponse" method="POST" target="hidden_iframe" class="space-y-4">
 		  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 			<input required name="entry.267578908" placeholder="姓名*" class="border rounded p-3 w-full" />
 			<input required name="entry.1191196199" placeholder="手機*" class="border rounded p-3 w-full" />
@@ -120,9 +120,9 @@
 			</select>
 			<select name="entry.523012097" required class="border rounded p-3 w-full md:col-span-2">
 			  <option value="">報名場次*</option>
-			  <option>09:30 ~ 16:20 主題論壇+論文發表</option>
-			  <option>09:30 ~ 12:00 主題論壇</option>
-			  <option>13:30 ~ 16:20 論文發表</option>
+			  <option>09:30－16:20 主題論壇+論文發表</option>
+			  <option>09:30－12:00 主題論壇</option>
+			  <option>13:30－16:20 論文發表</option>
 			</select>
 		  </div>
 		  <fieldset class="border rounded p-3">
@@ -147,6 +147,8 @@
 		  </textarea>
 		  <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-full font-semibold hover:bg-blue-700 transition">提交報名</button>
 		</form>
+		<div id="thanks" class="hidden text-green-600 text-xl font-bold text-center mt-6">報名成功！感謝您的填寫。</div>
+		<iframe name="hidden_iframe" style="display:none;"></iframe>
     </div>
   </section>
 
@@ -159,3 +161,13 @@
   </footer>
 </body>
 </html>
+<script>
+document.getElementById('gform').onsubmit = function() {
+  setTimeout(function() {
+    document.getElementById('gform').reset();
+    document.getElementById('thanks').classList.remove('hidden');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }, 500);
+  return true;
+}
+</script>
